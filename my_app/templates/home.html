@@ -10,7 +10,23 @@
 </head>
 <body>
     
-    <h1>My first Digital Ocean Project</h1>
+    <h1>My Form</h1>
+
+    <form method="POST" action=" {% url 'home' %} ">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+
+    {% for message in messages %} 
+
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+        <p class="alert alert-success float-center text-center">
+            {{ message }}
+        </p>
+        {% endif %}
+
+    {% endfor %}    
 
 
 
