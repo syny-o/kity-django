@@ -484,6 +484,10 @@ p, a, li, div, span {
 } */
 
 
+#navbar{
+    z-index: 9999;
+}
+
 #navbar a.vlink {
     color : #fff;
     position:relative;
