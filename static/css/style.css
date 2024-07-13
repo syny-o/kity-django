@@ -523,7 +523,7 @@ p, a, li, div, span {
     background : #000 !important;
   }
   #navbar a.vlink:hover {
-    box-shadow : 1px 2px 3px #9d451d;
+    /* box-shadow : 1px 2px 3px #9d451d; */
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f2825b+0,e55b2b+50,f07146+100;Red+3D+%232 */
     background: rgb(242,130,91); /* Old browsers */
     background: -moz-linear-gradient(left,  rgba(242,130,91,1) 0%, rgba(229,91,43,1) 50%, rgba(240,113,70,1) 100%); /* FF3.6-15 */
@@ -553,5 +553,12 @@ p, a, li, div, span {
     background: linear-gradient(to right,  rgb(123, 57, 161) 0%,rgb(168, 40, 188) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     background: linear-gradient(to right,  #6244C5 0%, #6244C5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=1 ); 
-    box-shadow :-6px 12px 5px 2px rgba(145,145,145,0.5)
+    /* box-shadow :-6px 12px 5px 2px rgba(145,145,145,0.5) */
   }
+
+
+
+
+  .btn-outline-primary {
+    border-width: 2px; /* Change this value to make the border thicker */
+}
