@@ -145,3 +145,8 @@ EMAIL_HOST_PASSWORD = 'bd0941a0e48ad241f74a3ce57ea51f27'
 
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+
+# Pillow settings
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media/'
