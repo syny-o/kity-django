@@ -9,19 +9,29 @@
             </div> {% endcomment %}
             <div class="col-lg-12 text-lg-start">
                 <ul class="list-inline mx-n3 mb-0" id="portfolio-flters">
-                    <li class="mx-3 active" data-filter="*">Vše</li>
+                    <li class="mx-3 active" data-filter=".portrait">Portréty</li>
                     <li class="mx-3" data-filter=".first">Rodiny a děti</li>
-                    <li class="mx-3" data-filter=".second">Těhotenství</li>
                     <li class="mx-3" data-filter=".third">Svatby</li>
                 </ul>
             </div>
         </div>
 
         <div class="row g-4 portfolio-container">
+            {% for photo in portrait_photos %}
+                <div class="col-lg-4 col-md-6 portfolio-item portrait">
+                    <div class="portfolio-img rounded overflow-hidden">
+                        <img class="img-fluid" src="{{ photo.image.url }}" alt="">
+                        <div class="portfolio-btn">
+                            <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="{{ photo.image.url }}" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+                            
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
 
           
 
-            <div class="col-lg-4 col-md-6 portfolio-item first">
+            {% comment %} <div class="col-lg-4 col-md-6 portfolio-item first">
                 <div class="portfolio-img rounded overflow-hidden">
                     <img class="img-fluid" src="{% static 'img/gallery-1.jpg' %}" alt="">
                     <div class="portfolio-btn">
@@ -93,7 +103,7 @@
                         <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href=""><i class="fa fa-link"></i></a>
                     </div>
                 </div>
-            </div>
+            </div> {% endcomment %}
         </div>
     </div>
 </div>

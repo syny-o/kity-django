@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
 
+
+from .models import PortraitPhoto
 from .forms import ContactForm
+
 
 
 
@@ -13,6 +16,7 @@ def home(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
+
 
             # get form data
             name = form.cleaned_data['name']
@@ -29,14 +33,27 @@ def home(request):
             )
 
             messages.success(request, 'Email sent successfully.')
+
+            context = {    
+                'form': form
+            }
+
             return redirect('home')
 
-    else:
-        form = ContactForm()
 
-    context = {
-        'form': form
-    }
+
+    if request.method == 'GET':
+
+        form = ContactForm()
+        
+        # get photos data
+        portrait_photos = PortraitPhoto.objects.all()
+
+        context = {
+            'portrait_photos': portrait_photos,
+            'form': form
+
+        }
 
 
     return render(request, 'home.html', context)
