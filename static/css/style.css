@@ -263,6 +263,12 @@
 
 
 /*** Project Portfolio ***/
+
+#portfolio-flters{
+    position: relative;
+    z-index: 9999;
+}
+
 #portfolio-flters li {
     display: inline-block;
     font-weight: 500;
