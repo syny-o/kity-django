@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 
 
-from .models import PortraitPhoto
+from .models import PortraitPhoto, PregnantPhoto, FamilyPhoto
 from .forms import ContactForm
 
 
@@ -48,9 +48,13 @@ def home(request):
         
         # get photos data
         portrait_photos = PortraitPhoto.objects.all()
+        pregnant_photos = PregnantPhoto.objects.all()
+        family_photos = FamilyPhoto.objects.all()
 
         context = {
             'portrait_photos': portrait_photos,
+            'pregnant_photos': pregnant_photos,
+            'family_photos': family_photos,
             'form': form
 
         }
