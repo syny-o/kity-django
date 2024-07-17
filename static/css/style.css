@@ -1,7 +1,8 @@
 /********** Template CSS **********/
 
 :root {
-    --primary: #6244C5;
+    /* --primary: #6244C5; */
+    --primary: #934c4c;
     --secondary: #FFC448;
     --light: #FAFAFB;
     --dark: #12141D;
@@ -506,14 +507,15 @@ p, a, li, div, span {
   }
   #navbar a.vlink span {
     position : absolute;
+    left: 0;
     opacity: 0;
-    transition : transform 400ms ease-out;
-    margin-left:24px;
+    transition : transform 200ms ease-out;
+    /* margin-left:24px; */
     box-shadow : 2px 4px 3px 1px rgba(0,0,0,0.2)
   }
 
-  
-  #navbar a.vlink span:before {
+  /* Sipka: */
+  /* #navbar a.vlink span:before {
     content : '';
     display:block;
     width:0;
@@ -524,7 +526,8 @@ p, a, li, div, span {
     border-right:8px solid #000;
     left:-12px;
     top:33%;
-  }
+  } */
+
   #navbar a.vlink span:hover {
     background : #000 !important;
   }
@@ -543,7 +546,8 @@ p, a, li, div, span {
   #navbar a.vlink:hover span {
     opacity:1;
     width:120px;
-    transform:translateX(12px);
+    /* transform:translateX(12px); */
+    transform:translateY(60px);
     background : #343434;
     font-size:16px;
     border-radius:6px;
@@ -560,13 +564,18 @@ p, a, li, div, span {
     background: linear-gradient(to right,  #6244C5 0%, #6244C5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=1 ); 
     /* box-shadow :-6px 12px 5px 2px rgba(145,145,145,0.5) */
+    
+  }
+
+  #navbar ul {
+    background: var(--primary);
   }
 
 
 
 
-.btn-outline-primary {
-    border-width: 2px; /* Change this value to make the border thicker */
+/* .btn-outline-primary {
+    border-width: 2px; 
 }
 
 .btn-outline-secondary{
@@ -578,4 +587,4 @@ p, a, li, div, span {
     color: #fff;
     border-color: #6244C5;
     background-color: #6244C5;
-}
+} */
