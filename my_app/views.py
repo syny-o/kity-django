@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.contrib import messages
 from django.core.mail import send_mail
 
@@ -32,13 +33,16 @@ def home(request):
                 recipient_list=['synek.o@seznam.cz', 'synekjbc@gmail.com'],
             )
 
-            messages.success(request, 'Email sent successfully.')
+            messages.success(request, 'Email byl odeslán. Ozvu se Vám co nejdříve.')
 
             context = {    
                 'form': form
             }
 
-            return redirect('home')
+            base_url = reverse('home')
+            contact_section = f"{base_url}#contact"
+            
+            return redirect(contact_section)
 
 
 
