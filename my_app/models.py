@@ -15,74 +15,37 @@ class Contact(models.Model):
     
 
 
-
-class PortraitPhoto(models.Model):
-
-
-    image = models.ImageField(upload_to='portrait_photos/')
+# Abstract class
+class Photo(models.Model):
     description = models.CharField(max_length=255)
-    
     order = models.IntegerField(default=0)
     type = models.CharField(max_length=1, choices=PHOTO_TYPES, default='P')
-
-    
     created_at = models.DateTimeField(auto_now_add=True)
 
-
     def __str__(self):
-        return self.description
-    
+        return f"{self.description} - {self.order} ({self.type})"
 
     class Meta:
+        abstract = True
         ordering = ['-type', 'order']
+    
 
 
 
+class PortraitPhoto(Photo):
+    image = models.ImageField(upload_to='portrait_photos/')
 
 
-class PregnantPhoto(models.Model):
-
-
+class PregnantPhoto(Photo):
     image = models.ImageField(upload_to='pregnant_photos/')
-    description = models.CharField(max_length=255)
-    
-    order = models.IntegerField(default=0)
-    type = models.CharField(max_length=1, choices=PHOTO_TYPES, default='P')
-
-    
-    created_at = models.DateTimeField(auto_now_add=True)
 
 
-    def __str__(self):
-        return self.description
-    
-
-    class Meta:
-        ordering = ['-type', 'order']    
-
-
-
-
-
-class FamilyPhoto(models.Model):
-
-
+class FamilyPhoto(Photo):
     image = models.ImageField(upload_to='family_photos/')
-    description = models.CharField(max_length=255)
-    
-    order = models.IntegerField(default=0)
-    type = models.CharField(max_length=1, choices=PHOTO_TYPES, default='P')
-
-    
-    created_at = models.DateTimeField(auto_now_add=True)
 
 
-    def __str__(self):
-        return self.description
-    
-
-    class Meta:
-        ordering = ['-type', 'order']                
+class WeddingPhoto(Photo):
+    image = models.ImageField(upload_to='wedding_photos/')
 
 
 
