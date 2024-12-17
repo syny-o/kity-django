@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.http import JsonResponse
 
 
 from .models import PortraitPhoto, PregnantPhoto, FamilyPhoto
 from .forms import ContactForm
+from .api.serializers import PortraitPhotoSerializer, ContactSerializer, FamilyPhotoSerializer, PregnantPhotoSerializer
 
 
 
@@ -30,7 +32,7 @@ def home(request):
                 subject='Contact Form',
                 message = f'You have a new message from {name} ({email})\n\n{message}',
                 from_email='django@demomailtrap.com',
-                recipient_list=['synek.o@seznam.cz', 'synekjbc@gmail.com'],
+                recipient_list=['synek.o@seznam.cz'],
             )
 
             messages.success(request, 'Email byl odeslán. Ozvu se Vám co nejdříve.')
@@ -65,3 +67,45 @@ def home(request):
 
 
     return render(request, 'home.html', context)
+
+
+
+
+def send_portrait_photos_to_api(request):
+    if request.method == 'GET':
+        photos = PortraitPhoto.objects.all()
+        serializer = PortraitPhotoSerializer(photos, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+def send_family_photos_to_api(request):
+    if request.method == 'GET':
+        photos = FamilyPhoto.objects.all()
+        serializer = FamilyPhotoSerializer(photos, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+def send_pregnant_photos_to_api(request):
+    if request.method == 'GET':
+        photos = PregnantPhoto.objects.all()
+        serializer = PregnantPhotoSerializer(photos, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+
+
+
+
+
+# only for DEBUG MODE
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+
+def receive_contact_from_api(request):
+    if request.method == 'POST':
+
+
+        serializer = ContactSerializer(data=request.POST)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        
+        return JsonResponse(serializer.errors, status=400)
+
