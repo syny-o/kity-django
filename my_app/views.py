@@ -5,9 +5,9 @@ from django.core.mail import send_mail
 from django.http import JsonResponse
 
 
-from .models import PortraitPhoto, PregnantPhoto, FamilyPhoto
+from .models import PortraitPhoto, PregnantPhoto, FamilyPhoto, WeddingPhoto
 from .forms import ContactForm
-from .api.serializers import PortraitPhotoSerializer, ContactSerializer, FamilyPhotoSerializer, PregnantPhotoSerializer
+from .api.serializers import PortraitPhotoSerializer, ContactSerializer, FamilyPhotoSerializer, PregnantPhotoSerializer, WeddingPhotoSerializer
 
 
 
@@ -56,11 +56,14 @@ def home(request):
         portrait_photos = PortraitPhoto.objects.all()
         pregnant_photos = PregnantPhoto.objects.all()
         family_photos = FamilyPhoto.objects.all()
+        wedding_photos = WeddingPhoto.objects.all()
 
         context = {
             'portrait_photos': portrait_photos,
             'pregnant_photos': pregnant_photos,
             'family_photos': family_photos,
+            'wedding_photos': wedding_photos,
+
             'form': form
 
         }
@@ -87,6 +90,12 @@ def send_pregnant_photos_to_api(request):
     if request.method == 'GET':
         photos = PregnantPhoto.objects.all()
         serializer = PregnantPhotoSerializer(photos, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+def send_wedding_photos_to_api(request):
+    if request.method == 'GET':
+        photos = WeddingPhoto.objects.all()
+        serializer = WeddingPhotoSerializer(photos, many=True)
         return JsonResponse(serializer.data, safe=False)
 
 
