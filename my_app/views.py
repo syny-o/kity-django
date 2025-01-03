@@ -114,6 +114,15 @@ def receive_contact_from_api(request):
         serializer = ContactSerializer(data=request.POST)
         if serializer.is_valid():
             serializer.save()
+            name = serializer.data['name']
+            email = serializer.data['email']
+            message = serializer.data['message']
+            send_mail(
+                subject='Contact Form',
+                message = f'You have a new message from {name} ({email})\n\n{message}',
+                from_email='synekjbc@gmail.com',
+                recipient_list=['synek.o@seznam.cz'],
+            )
             return JsonResponse(serializer.data, status=201)
         
         return JsonResponse(serializer.errors, status=400)
