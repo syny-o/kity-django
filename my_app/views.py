@@ -103,9 +103,8 @@ def send_wedding_photos_to_api(request):
 
 
 
-# only for DEBUG MODE
-# from django.views.decorators.csrf import csrf_exempt
-# @csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
 
 def receive_contact_from_api(request):
     if request.method == 'POST':
