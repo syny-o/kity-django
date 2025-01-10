@@ -104,8 +104,8 @@ def send_wedding_photos_to_api(request):
 
 
 # only for DEBUG MODE
-from django.views.decorators.csrf import csrf_exempt
-@csrf_exempt
+# from django.views.decorators.csrf import csrf_exempt
+# @csrf_exempt
 
 def receive_contact_from_api(request):
     if request.method == 'POST':
@@ -118,10 +118,10 @@ def receive_contact_from_api(request):
             email = serializer.data['email']
             message = serializer.data['message']
             send_mail(
-                subject='Contact Form',
-                message = f'You have a new message from {name} ({email})\n\n{message}',
+                subject='marketasynkova.cz - Nová zpráva',
+                message = f'Máš novou zprávu od {name} ({email})\n\n{message}',
                 from_email='synekjbc@gmail.com',
-                recipient_list=['synek.o@seznam.cz'],
+                recipient_list=['synek.o@seznam.cz', 'marketa.synkova@gmail.com'],
             )
             return JsonResponse(serializer.data, status=201)
         
