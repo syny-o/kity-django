@@ -144,3 +144,20 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
 }
+
+
+# CSRF Settings
+
+# Povolení sdílení ověřovacích údajů mezi klientem (React) a serverem (Django).
+# To umožňuje odesílání cookies (např. csrftoken) nebo jiných credentials (např. Authorization header) při požadavcích mezi různými doménami.
+# Nutné, pokud používáš credentials: "include" na straně klienta.
+CORS_ALLOW_CREDENTIALS = True
+
+# Používá bezpečné (HTTPS) cookies - nastav na True v produkčním prostředí.
+CSRF_COOKIE_SECURE = True
+
+# Povoluje čtení CSRF tokenu z cookies pomocí JavaScriptu - nutné, pokud token přidáváš do hlavičky X-CSRFToken.
+CSRF_COOKIE_HTTPONLY = False  
+
+# Token je uložen v cookies, ne v relaci (session).
+CSRF_USE_SESSIONS = False  
