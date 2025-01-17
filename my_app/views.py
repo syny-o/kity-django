@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.http import JsonResponse
+from django.views.decorators.http import require_http_methods
 
 
 from .models import PortraitPhoto, PregnantPhoto, FamilyPhoto, WeddingPhoto
@@ -74,29 +75,47 @@ def home(request):
 
 
 
+
+
+@require_http_methods(["GET"])
 def send_portrait_photos_to_api(request):
-    if request.method == 'GET':
+    try:
         photos = PortraitPhoto.objects.all()
         serializer = PortraitPhotoSerializer(photos, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return JsonResponse(serializer.data, safe=False, status=200)  # Úspěšný požadavek
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)  # Interní chyba serveru
 
+
+@require_http_methods(["GET"])
 def send_family_photos_to_api(request):
-    if request.method == 'GET':
+    try:
         photos = FamilyPhoto.objects.all()
         serializer = FamilyPhotoSerializer(photos, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return JsonResponse(serializer.data, safe=False, status=200)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
 
+
+@require_http_methods(["GET"])
 def send_pregnant_photos_to_api(request):
-    if request.method == 'GET':
+    try:
         photos = PregnantPhoto.objects.all()
         serializer = PregnantPhotoSerializer(photos, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return JsonResponse(serializer.data, safe=False, status=200)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
 
+
+@require_http_methods(["GET"])
 def send_wedding_photos_to_api(request):
-    if request.method == 'GET':
+    try:
         photos = WeddingPhoto.objects.all()
         serializer = WeddingPhotoSerializer(photos, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return JsonResponse(serializer.data, safe=False, status=200)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
 
 
 
