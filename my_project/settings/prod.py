@@ -5,12 +5,13 @@ from .base import *
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['marketasynkova.cz', 'www.marketasynkova.cz']
+ALLOWED_HOSTS = ['marketasynkova.cz', 'www.marketasynkova.cz',"164.92.181.169"]
 
 
 
 CORS_ALLOWED_ORIGINS = [
     "https://marketasynkova.cz",
+    "https://www.marketasynkova.cz",
 ]
 
 CSRF_TRUSTED_ORIGINS = [*CORS_ALLOWED_ORIGINS]
