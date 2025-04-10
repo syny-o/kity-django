@@ -6,9 +6,9 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 
 
-from .models import PortraitPhoto, PregnantPhoto, FamilyPhoto, WeddingPhoto
+from .models import PortraitPhoto, PregnantPhoto, FamilyPhoto, WeddingPhoto, CommercePhoto
 from .forms import ContactForm
-from .api.serializers import PortraitPhotoSerializer, ContactSerializer, FamilyPhotoSerializer, PregnantPhotoSerializer, WeddingPhotoSerializer
+from .api.serializers import PortraitPhotoSerializer, ContactSerializer, FamilyPhotoSerializer, PregnantPhotoSerializer, WeddingPhotoSerializer, CommercePhotoSerializer
 
 
 
@@ -117,6 +117,14 @@ def send_wedding_photos_to_api(request):
         return JsonResponse({"error": str(e)}, status=500)
 
 
+@require_http_methods(["GET"])
+def send_commerce_photos_to_api(request):
+    try:
+        photos = CommercePhoto.objects.all()
+        serializer = CommercePhotoSerializer(photos, many=True)
+        return JsonResponse(serializer.data, safe=False, status=200)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
 
 
 

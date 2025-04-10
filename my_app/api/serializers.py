@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from my_app.models import PortraitPhoto, FamilyPhoto, PregnantPhoto, WeddingPhoto
+from my_app.models import PortraitPhoto, FamilyPhoto, PregnantPhoto, WeddingPhoto, CommercePhoto
 from my_app.models import Contact
 
 
@@ -21,6 +21,11 @@ class PregnantPhotoSerializer(serializers.ModelSerializer):
 class WeddingPhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = WeddingPhoto
+        fields = '__all__'
+
+class CommercePhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommercePhoto
         fields = '__all__'
 
 

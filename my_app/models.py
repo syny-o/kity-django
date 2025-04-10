@@ -48,4 +48,6 @@ class WeddingPhoto(Photo):
     image = models.ImageField(upload_to='wedding_photos/')
 
 
+class CommercePhoto(Photo):
+    image = models.ImageField(upload_to='commerce_photos/')
 
