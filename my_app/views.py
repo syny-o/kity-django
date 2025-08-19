@@ -128,7 +128,8 @@ def send_commerce_photos_to_api(request):
 
 
 
-
+import logging
+log = logging.getLogger(__name__)
 
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
@@ -143,12 +144,18 @@ def receive_contact_from_api(request):
             name = serializer.data['name']
             email = serializer.data['email']
             message = serializer.data['message']
-            send_mail(
-                subject='marketasynkova.cz - Nová zpráva',
-                message = f'Máš novou zprávu od {name} ({email})\n\n{message}',
-                from_email='synekjbc@gmail.com',
-                recipient_list=['synek.o@seznam.cz', 'marketa.synkova@gmail.com'],
-            )
+            try:
+                log.info("contact email: sending")
+                send_mail(
+                    subject='marketasynkova.cz - Nová zpráva',
+                    message = f'Máš novou zprávu od {name} ({email})\n\n{message}',
+                    from_email='synekjbc@gmail.com',
+                    recipient_list=['synek.o@seznam.cz', 'marketa.synkova@gmail.com'],
+                )
+                log.info("contact email: sent")
+            except Exception as e:
+                # neshodí request; jen zaloguješ důvod (SMTP/DNS/timeout…)
+                log.exception("contact email failed: %s", e)
             return JsonResponse(serializer.data, status=201)
         
         return JsonResponse(serializer.errors, status=400)
