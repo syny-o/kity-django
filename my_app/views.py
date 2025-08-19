@@ -149,7 +149,7 @@ def receive_contact_from_api(request):
                 send_mail(
                     subject='marketasynkova.cz - Nová zpráva',
                     message = f'Máš novou zprávu od {name} ({email})\n\n{message}',
-                    from_email='synekjbc@gmail.com',
+                    from_email='info@marketasynkova.cz',
                     recipient_list=['synek.o@seznam.cz', 'marketa.synkova@gmail.com'],
                 )
                 log.info("contact email: sent")
