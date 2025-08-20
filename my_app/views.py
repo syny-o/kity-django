@@ -14,63 +14,7 @@ from .api.serializers import PortraitPhotoSerializer, ContactSerializer, FamilyP
 
 
 
-def home(request):
 
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-
-
-            # get form data
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            message = form.cleaned_data['message']
-
-            
-            # send mail
-            send_mail(
-                subject='Contact Form',
-                message = f'You have a new message from {name} ({email})\n\n{message}',
-                from_email='django@demomailtrap.com',
-                recipient_list=['synek.o@seznam.cz'],
-            )
-
-            messages.success(request, 'Email byl odeslán. Ozvu se Vám co nejdříve.')
-
-            context = {    
-                'form': form
-            }
-
-            base_url = reverse('home')
-            contact_section = f"{base_url}#contact"
-            
-            return redirect(contact_section)
-
-
-
-    if request.method == 'GET':
-
-        form = ContactForm()
-        
-        # get photos data
-        portrait_photos = PortraitPhoto.objects.all()
-        pregnant_photos = PregnantPhoto.objects.all()
-        family_photos = FamilyPhoto.objects.all()
-        wedding_photos = WeddingPhoto.objects.all()
-
-        context = {
-            'portrait_photos': portrait_photos,
-            'pregnant_photos': pregnant_photos,
-            'family_photos': family_photos,
-            'wedding_photos': wedding_photos,
-
-            'form': form
-
-        }
-
-
-    return render(request, 'home.html', context)
 
 
 
@@ -125,6 +69,11 @@ def send_commerce_photos_to_api(request):
         return JsonResponse(serializer.data, safe=False, status=200)
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+
+
+
+
+
 
 
 
